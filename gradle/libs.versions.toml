@@ -12,9 +12,11 @@ appcompat = "1.6.1"
 material = "1.10.0"
 ktorVersion = "2.3.6"
 coilComposeVersion = "2.5.0"
+navigationCompose = "2.8.7"
 
 [libraries]
 # Coil
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilComposeVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

@@ -2,7 +2,6 @@ package com.example.rickandmorty.screens
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -13,17 +12,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
@@ -43,6 +39,7 @@ import kotlinx.coroutines.delay
 fun CharacterDetailsScreen(
     ktorClient: KtorClient,
     characterId: Int,
+    onEpisodeClick: (Int) -> Unit
 ) {
     var character by remember { mutableStateOf<Character?>(null) }
 
@@ -64,8 +61,11 @@ fun CharacterDetailsScreen(
     }
 
     LaunchedEffect(key1 = Unit, block = {
-        delay(500)
-        character = ktorClient.getCharacter(characterId)
+        ktorClient.getCharacter(characterId).onSuccess {
+            character = it
+        }.onFailure { exc ->
+            // TODO: handling exception
+        }
     })
 
     LazyColumn(modifier = Modifier.fillMaxWidth(), contentPadding = PaddingValues(all = 16.dp)) {
@@ -75,6 +75,7 @@ fun CharacterDetailsScreen(
                 return@item
             }
         }
+        item { Spacer(modifier = Modifier.height(24.dp)) }
         item {
             character?.let {
                 CharacterDetailsNamePlateComponent(
@@ -115,7 +116,7 @@ fun CharacterDetailsScreen(
                         RoundedCornerShape(12.dp)
                     )
                     .clickable {
-                        // TODO:
+                        onEpisodeClick(characterId)
                     }
                     .padding(vertical = 8.dp)
             )
