@@ -105,11 +105,12 @@ fun CharacterDetailsScreen(
         //Button
         item {
             Text(
-                text = "View all the episodes",
+                text = "Ver todos los episodios",
                 color = RickAction,
                 fontSize = 18.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
+                    .fillMaxWidth()
                     .padding(horizontal = 32.dp)
                     .border(width = 1.dp, color = RickAction, shape = RoundedCornerShape(12.dp))
                     .clip(

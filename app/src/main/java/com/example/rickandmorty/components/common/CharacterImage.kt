@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.SubcomposeAsyncImage
 
 private val defaultModifier = Modifier
     .fillMaxWidth()
@@ -19,12 +20,12 @@ private val defaultModifier = Modifier
 
 @Composable
 fun CharacterImage(imageUrl: String, modifier: Modifier = defaultModifier) {
-//    SubcomposeAsyncImage(
-//        model = imageUrl,
-//        contentDescription = "Character image",
-//        modifier = modifier,
-//        loading = { LoadingState() }
-//    )
+    SubcomposeAsyncImage(
+        model = imageUrl,
+        contentDescription = "Character image",
+        modifier = modifier,
+        loading = { LoadingState() }
+    )
 }
 
 @Preview

@@ -29,7 +29,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.network.KtorClient
 import com.example.rickandmorty.screens.CharacterDetailsScreen
-import com.example.rickandmorty.ui.theme.RickAction
+import com.example.rickandmorty.screens.CharacterEpisodeScreen
 import com.example.rickandmorty.ui.theme.RickPrimary
 import com.example.rickandmorty.ui.theme.SimpleRickTheme
 
@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                         composable(route = "character_episodes/{characterId}",
                             arguments = listOf(navArgument("characterId"){type = NavType.IntType})){ backstackEntry ->
                             val characterId  = backstackEntry.arguments?.getInt("characterId") ?: 0
-                            CharacterEpisodeScreen(characterId)
+                            CharacterEpisodeScreen(ktorClient = ktorClient,characterId=characterId)
                         }
                     }
                 }
@@ -60,9 +60,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun CharacterEpisodeScreen(characterId:Int) {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
-        Text(text = "Character episode screen: $characterId", fontSize = 28.sp, color = RickAction)
-    }
-}
