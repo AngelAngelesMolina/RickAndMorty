@@ -32,31 +32,41 @@ import com.example.rickandmorty.screens.CharacterDetailsScreen
 import com.example.rickandmorty.screens.CharacterEpisodeScreen
 import com.example.rickandmorty.ui.theme.RickPrimary
 import com.example.rickandmorty.ui.theme.SimpleRickTheme
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val ktorClient = KtorClient()
+    @Inject
+    lateinit var ktorClient: KtorClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-           val navController = rememberNavController()
+            val navController = rememberNavController()
             SimpleRickTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = RickPrimary) {
-                    NavHost(navController = navController, startDestination = "character_details"){
-                        composable("character_details"){
-                            CharacterDetailsScreen(ktorClient = ktorClient, characterId = 2){
+                    NavHost(navController = navController, startDestination = "character_details") {
+                        composable("character_details") {
+                            CharacterDetailsScreen(ktorClient = ktorClient, characterId = 2) {
                                 navController.navigate("character_episodes/$it")
                             }
                         }
                         composable(route = "character_episodes/{characterId}",
-                            arguments = listOf(navArgument("characterId"){type = NavType.IntType})){ backstackEntry ->
-                            val characterId  = backstackEntry.arguments?.getInt("characterId") ?: 0
-                            CharacterEpisodeScreen(ktorClient = ktorClient,characterId=characterId)
+                            arguments = listOf(navArgument("characterId") {
+                                type = NavType.IntType
+                            })
+                        ) { backstackEntry ->
+                            val characterId = backstackEntry.arguments?.getInt("characterId") ?: 0
+                            CharacterEpisodeScreen(
+                                ktorClient = ktorClient,
+                                characterId = characterId
+                            )
                         }
                     }
                 }
             }
-         }
+        }
     }
 }
 
