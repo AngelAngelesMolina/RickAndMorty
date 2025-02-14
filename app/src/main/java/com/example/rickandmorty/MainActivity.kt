@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize(), color = RickPrimary) {
                     NavHost(navController = navController, startDestination = "character_details") {
                         composable("character_details") {
-                            CharacterDetailsScreen(ktorClient = ktorClient, characterId = 2) {
+                            CharacterDetailsScreen( characterId = 2) {
                                 navController.navigate("character_episodes/$it")
                             }
                         }
