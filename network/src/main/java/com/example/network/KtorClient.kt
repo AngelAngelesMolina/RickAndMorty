@@ -1,10 +1,13 @@
 package com.example.network
 
 import com.example.network.models.domain.Character
+import com.example.network.models.domain.CharacterPage
 import com.example.network.models.domain.Episode
 import com.example.network.models.remote.RemoteCharacter
+import com.example.network.models.remote.RemoteCharacterPage
 import com.example.network.models.remote.RemoteEpisode
 import com.example.network.models.remote.toDomainCharacter
+import com.example.network.models.remote.toDomainCharacterPage
 import com.example.network.models.remote.toDomainEpisode
 import com.example.network.utils.ApiOperation
 import io.ktor.client.HttpClient
@@ -61,6 +64,14 @@ class KtorClient {
                 client.get("episode/$idsCommaSeparated").body<List<RemoteEpisode>>()
                     .map { it.toDomainEpisode() }
             }
+        }
+    }
+    suspend fun getCharacterByPage(
+        pageNumber: Int
+    ): ApiOperation<CharacterPage> {
+        return safeApiCall {
+            client.get("character/?page=$pageNumber")
+                .body<RemoteCharacterPage>().toDomainCharacterPage()
         }
     }
 

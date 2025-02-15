@@ -30,6 +30,7 @@ import androidx.navigation.navArgument
 import com.example.network.KtorClient
 import com.example.rickandmorty.screens.CharacterDetailsScreen
 import com.example.rickandmorty.screens.CharacterEpisodeScreen
+import com.example.rickandmorty.screens.HomeScreen
 import com.example.rickandmorty.ui.theme.RickPrimary
 import com.example.rickandmorty.ui.theme.SimpleRickTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,13 +47,28 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             SimpleRickTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = RickPrimary) {
-                    NavHost(navController = navController, startDestination = "character_details") {
-                        composable("character_details") {
-                            CharacterDetailsScreen( characterId = 2) {
-                                navController.navigate("character_episodes/$it")
-                            }
+                    NavHost(navController = navController, startDestination = "home_screen") {
+                        composable(route = "home_screen") {
+                            HomeScreen(onCharacterSelected = { charId ->
+                                navController.navigate("character_details/$charId")
+                            })
                         }
-                        composable(route = "character_episodes/{characterId}",
+                        composable(
+                            "character_details/{characterId}",
+                            arguments = listOf(navArgument("characterId") {
+                                type = NavType.IntType
+                            })
+                        ) { entry ->
+                            val characterId = entry.arguments?.getInt("characterId") ?: 0
+                            CharacterDetailsScreen(
+                                characterId,
+
+                                onEpisodeClick = { navController.navigate("character_episodes/$it") },
+                                onBackClic = { navController.navigateUp() }
+                            )
+                        }
+                        composable(
+                            route = "character_episodes/{characterId}",
                             arguments = listOf(navArgument("characterId") {
                                 type = NavType.IntType
                             })
@@ -60,7 +76,8 @@ class MainActivity : ComponentActivity() {
                             val characterId = backstackEntry.arguments?.getInt("characterId") ?: 0
                             CharacterEpisodeScreen(
                                 ktorClient = ktorClient,
-                                characterId = characterId
+                                characterId = characterId,
+                                onBackClicked = {navController.navigateUp()}
                             )
                         }
                     }
