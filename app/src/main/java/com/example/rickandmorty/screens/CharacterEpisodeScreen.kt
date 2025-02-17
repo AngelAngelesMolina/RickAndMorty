@@ -82,7 +82,7 @@ private fun MainScreen(character: Character, episodes: List<Episode>, onBackClic
             item { Spacer(modifier = Modifier.height(30.dp)) }
             item { CharacterNameComponent(name = character.name) }
             item { Spacer(modifier = Modifier.height(16.dp)) }
-            item {
+            item { 
                 LazyRow {
                     episodeBySeasonMap.forEach { entry ->
                         val title = "Temp ${entry.key}"
