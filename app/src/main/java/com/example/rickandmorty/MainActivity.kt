@@ -61,10 +61,9 @@ class MainActivity : ComponentActivity() {
                         ) { entry ->
                             val characterId = entry.arguments?.getInt("characterId") ?: 0
                             CharacterDetailsScreen(
-                                characterId,
-
-                                onEpisodeClick = { navController.navigate("character_episodes/$it") },
-                                onBackClic = { navController.navigateUp() }
+                                characterId = characterId,
+                                onEpisodeClicked = { navController.navigate("character_episodes/$it") },
+                                onBackClicked = { navController.navigateUp() }
                             )
                         }
                         composable(

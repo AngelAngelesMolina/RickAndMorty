@@ -54,8 +54,8 @@ sealed interface CharacterDetailsViewState {
 fun CharacterDetailsScreen(
     characterId: Int,
     viewModel: CharacterDetailsViewModel = hiltViewModel(),
-    onEpisodeClick: (Int) -> Unit,
-    onBackClic : () -> Unit
+    onEpisodeClicked: (Int) -> Unit,
+    onBackClicked: () -> Unit
 ) {
 
 
@@ -65,7 +65,7 @@ fun CharacterDetailsScreen(
     val state by viewModel.stateFlow.collectAsState()
     Column {
         Spacer(modifier = Modifier.height(24.dp))
-        SimpleToolbar("Character detail", onBackAction = {onBackClic})
+        SimpleToolbar("Character detail",  onBackAction = onBackClicked)
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(all = 16.dp)
@@ -126,7 +126,7 @@ fun CharacterDetailsScreen(
                                     RoundedCornerShape(12.dp)
                                 )
                                 .clickable {
-                                    onEpisodeClick(characterId)
+                                    onEpisodeClicked(characterId)
                                 }
                                 .padding(vertical = 8.dp)
                         )

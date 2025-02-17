@@ -77,7 +77,7 @@ private fun MainScreen(character: Character, episodes: List<Episode>, onBackClic
     val episodeBySeasonMap = episodes.groupBy { it.seasonNumber }
     Column {
         Spacer(modifier = Modifier.height(24.dp))
-        SimpleToolbar("Episodes", onBackAction = {onBackClicked})
+        SimpleToolbar("Episodes", onBackAction = onBackClicked)
         LazyColumn(contentPadding = PaddingValues(all = 16.dp)) {
             item { Spacer(modifier = Modifier.height(30.dp)) }
             item { CharacterNameComponent(name = character.name) }
