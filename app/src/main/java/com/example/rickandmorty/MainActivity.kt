@@ -29,7 +29,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.network.KtorClient
 import com.example.rickandmorty.screens.CharacterDetailsScreen
-import com.example.rickandmorty.screens.CharacterEpisodeScreen
 import com.example.rickandmorty.screens.HomeScreen
 import com.example.rickandmorty.ui.theme.RickPrimary
 import com.example.rickandmorty.ui.theme.SimpleRickTheme
@@ -66,19 +65,19 @@ class MainActivity : ComponentActivity() {
                                 onBackClicked = { navController.navigateUp() }
                             )
                         }
-                        composable(
-                            route = "character_episodes/{characterId}",
-                            arguments = listOf(navArgument("characterId") {
-                                type = NavType.IntType
-                            })
-                        ) { backstackEntry ->
-                            val characterId = backstackEntry.arguments?.getInt("characterId") ?: 0
-                            CharacterEpisodeScreen(
-                                ktorClient = ktorClient,
-                                characterId = characterId,
-                                onBackClicked = {navController.navigateUp()}
-                            )
-                        }
+//                        composable(
+//                            route = "character_episodes/{characterId}",
+//                            arguments = listOf(navArgument("characterId") {
+//                                type = NavType.IntType
+//                            })
+//                        ) { backstackEntry ->
+//                            val characterId = backstackEntry.arguments?.getInt("characterId") ?: 0
+//                            CharacterEpisodeScreen(
+//                                ktorClient = ktorClient,
+//                                characterId = characterId,
+//                                onBackClicked = {navController.navigateUp()}
+//                            )
+//                        }
                     }
                 }
             }

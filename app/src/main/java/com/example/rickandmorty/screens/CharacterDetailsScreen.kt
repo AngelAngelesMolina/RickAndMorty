@@ -108,29 +108,29 @@ fun CharacterDetailsScreen(
                     }
                     item { Spacer(modifier = Modifier.height(32.dp)) }
                     //Button
-                    item {
-                        Text(
-                            text = "Ver todos los episodios",
-                            color = RickAction,
-                            fontSize = 18.sp,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 32.dp)
-                                .border(
-                                    width = 1.dp,
-                                    color = RickAction,
-                                    shape = RoundedCornerShape(12.dp)
-                                )
-                                .clip(
-                                    RoundedCornerShape(12.dp)
-                                )
-                                .clickable {
-                                    onEpisodeClicked(characterId)
-                                }
-                                .padding(vertical = 8.dp)
-                        )
-                    }
+//                    item {
+//                        Text(
+//                            text = "Ver todos los episodios",
+//                            color = RickAction,
+//                            fontSize = 18.sp,
+//                            textAlign = TextAlign.Center,
+//                            modifier = Modifier
+//                                .fillMaxWidth()
+//                                .padding(horizontal = 32.dp)
+//                                .border(
+//                                    width = 1.dp,
+//                                    color = RickAction,
+//                                    shape = RoundedCornerShape(12.dp)
+//                                )
+//                                .clip(
+//                                    RoundedCornerShape(12.dp)
+//                                )
+//                                .clickable {
+//                                    onEpisodeClicked(characterId)
+//                                }
+//                                .padding(vertical = 8.dp)
+//                        )
+//                    }
 
                 }
             }
