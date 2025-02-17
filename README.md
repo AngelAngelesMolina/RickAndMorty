@@ -25,7 +25,7 @@ Ees una aplicación que te permite explorar y descubrir información sobre tus p
 Aquí hay algunas capturas de pantalla de la aplicación:
 | Pantalla Principal                                    | Detalles del Personaje                             |
 |------------------------------------------------------|----------------------------------------------------|
-| ![Pantalla Principal](screenshots/lista_general.png) |![Detalles del Personaje](screenshots/detalle.png) |
+| ![Pantalla Principal](screenshots/lista_general.jpeg) |![Detalles del Personaje](screenshots/detalle.jpeg) |
 
 
 ## Instalación
